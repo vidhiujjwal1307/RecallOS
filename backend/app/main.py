@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import Base, engine
 from app.models.memory import Memory
@@ -7,6 +8,15 @@ from app.routes.memory import router
 from app.routes.auth import router as auth_router
 
 app = FastAPI(title="RecallOS")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 Base.metadata.create_all(bind=engine)
 
