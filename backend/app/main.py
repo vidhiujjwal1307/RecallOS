@@ -17,6 +17,24 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+from sqlalchemy import text
+
+with engine.connect() as conn:
+    try:
+        conn.execute(text(
+            "ALTER TABLE memories ADD COLUMN favorite BOOLEAN DEFAULT 0"
+        ))
+    except:
+        pass
+
+    try:
+        conn.execute(text(
+            "ALTER TABLE memories ADD COLUMN pinned BOOLEAN DEFAULT 0"
+        ))
+    except:
+        pass
+
+    conn.commit()
 
 Base.metadata.create_all(bind=engine)
 
