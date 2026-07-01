@@ -12,13 +12,13 @@ function Dashboard() {
     let greeting = "";
 
     if (hour < 12) {
-        greeting = "Good Morning ☀️";
+        greeting = "Good Morning☀️";
     } else if (hour < 17) {
-        greeting = "Good Afternoon 👋";
+        greeting = "Good Afternoon👋";
     } else if (hour < 21) {
-        greeting = "Good Evening 🌇";
+        greeting = "Good Evening🌇";
     } else {
-        greeting = "Good Night 🌙";
+        greeting = "Good Night🌙";
     }
 
     const messages = [
@@ -79,13 +79,11 @@ function Dashboard() {
 
     <div className="flex items-center gap-4">
 
-        <h1 className="text-6xl font-bold text-white">
+        <h1 className="text-4xl font-bold text-white">
             {greeting}
         </h1>
 
-        <span className="text-5xl">
-            🧠
-        </span>
+        
 
     </div>
 
@@ -161,40 +159,64 @@ function Dashboard() {
         Recent Memories
     </h2>
 
-    <div className="space-y-4">
+    <div className="grid grid-cols-2 gap-6">
 
-        {stats.recent.map((memory) => (
+    {stats.recent.map((memory) => (
 
-            <div
-                key={memory.id}
-                className="bg-[#171d33] rounded-xl p-5 border border-[#252d48]"
-            >
+        <div
+            key={memory.id}
+            className="
+                bg-[#171d33]
+                rounded-3xl
+                border
+                border-[#252d48]
+                p-7
+                hover:border-purple-500
+                hover:-translate-y-2
+                hover:shadow-[0_0_35px_rgba(168,85,247,0.18)]
+                transition-all
+                duration-300
+                cursor-pointer
+            "
+        >
 
-                <h3 className="text-xl font-semibold">
-                    {memory.title}
-                </h3>
+            <div className="flex justify-between items-start">
 
-                <p className="text-gray-400 mt-2">
-                    {memory.content}
-                </p>
+                <div>
 
-                <div className="flex gap-3 mt-4">
+                    <h3 className="text-2xl font-bold">
+                        🧠 {memory.title}
+                    </h3>
 
-                    <span className="bg-purple-600 px-3 py-1 rounded-full text-sm">
-                        {memory.category}
-                    </span>
+                    <p className="text-gray-400 mt-3 leading-relaxed">
+                        {memory.content}
+                    </p>
 
-                    <span className="text-gray-500 text-sm">
-                        {memory.timestamp}
-                    </span>
+                </div>
 
+                <div className="text-purple-400 text-2xl">
+                    →
                 </div>
 
             </div>
 
-        ))}
+            <div className="flex items-center justify-between mt-8">
 
-    </div>
+                <span className="bg-purple-600 px-4 py-2 rounded-full text-sm">
+                    {memory.category}
+                </span>
+
+                <span className="text-gray-500 text-sm">
+                    📅 {memory.timestamp}
+                </span>
+
+            </div>
+
+        </div>
+
+    ))}
+
+</div>
 
 </div>
 
